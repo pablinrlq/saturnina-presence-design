@@ -1,8 +1,9 @@
 # Roadmap Saturnina
 
-- [ ] Design system e componentes-base
-- [ ] Login administrativo
-- [ ] Homepage editorial
-- [ ] Fluxo de agendamento
-- [ ] Dashboard administrativo
-- [ ] Demais páginas públicas e administrativas
+- [x] Design system e componentes-base
+- [x] Login administrativo
+- [x] Homepage editorial
+- [x] Fluxo de agendamento
+- [x] Dashboard administrativo
+- [x] Demais páginas públicas
+- [ ] Demais áreas administrativas — aguardam conteúdo operacional real

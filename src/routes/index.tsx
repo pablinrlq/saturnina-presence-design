@@ -1,24 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import heroImage from "@/assets/saturnina-hero.jpg";
+import hairImage from "@/assets/saturnina-hair.jpg";
+import productsImage from "@/assets/saturnina-products.jpg";
+import { Button } from "@/components/ui/button";
+import { PublicHeader } from "@/components/saturnina/public-header";
+import { Footer } from "@/components/saturnina/page-shell";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+export const Route = createFileRoute("/")({ head: () => ({ meta: [{ title: "Saturnina — Beleza que revela presença" }, { name: "description", content: "Uma experiência de beleza autoral, editorial e sensorial." }, { property: "og:title", content: "Saturnina — Beleza que revela presença" }, { property: "og:description", content: "Uma experiência de beleza autoral, editorial e sensorial." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Home });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function Home() {
+  return <main className="overflow-hidden bg-background"><section className="relative min-h-[92vh] bg-brand-ink text-primary-foreground"><PublicHeader overlay /><img src={heroImage} width={1440} height={1808} alt="Retrato editorial Saturnina" className="absolute inset-0 h-full w-full object-cover object-center opacity-90 image-veil"/><div className="relative z-10 flex min-h-[92vh] max-w-7xl flex-col justify-end px-5 pb-10 md:px-10 md:pb-14"><h1 className="reveal max-w-4xl text-7xl leading-[.82] md:text-[8rem]">Beleza que<br/><em>revela presença.</em></h1><div className="mt-10 flex items-end justify-between"><Button asChild variant="soft" size="lg"><Link to="/agendamento">Agendar experiência</Link></Button><span className="hidden items-center gap-3 text-[10px] uppercase md:flex">Scroll to discover <ArrowDown size={14}/></span></div></div></section>
+  <section className="mx-auto max-w-7xl px-5 py-32 md:px-10 md:py-52"><p className="mb-12 text-xs uppercase text-primary">Manifesto Saturnina</p><div className="grid gap-14 md:grid-cols-[1fr_2.5fr]"><p className="text-sm leading-6 text-muted-foreground">A estética como portal para revelar identidade, força e sofisticação de forma autêntica.</p><h2 className="text-5xl leading-[1.02] md:text-8xl">Não é sobre transformar você em outra pessoa.<br/><em className="text-primary">É sobre revelar aquilo que sempre esteve aí.</em></h2></div></section>
+  <section className="grid min-h-[80vh] md:grid-cols-2"><img src={hairImage} loading="lazy" width={1600} height={1104} alt="Cabelos em movimento" className="h-full min-h-[55vh] w-full object-cover image-veil"/><div className="flex flex-col justify-between bg-primary p-8 text-primary-foreground md:p-16"><p className="text-xs uppercase">A experiência</p><div><h2 className="text-6xl leading-none md:text-8xl">Sua essência.<br/>Sua força.<br/>Sua presença.</h2><Link to="/experiencia" className="mt-12 inline-flex items-center gap-2 border-b pb-2 text-sm uppercase">Conhecer a experiência <ArrowUpRight size={15}/></Link></div></div></section>
+  <section className="mx-auto grid max-w-7xl gap-14 px-5 py-28 md:grid-cols-2 md:px-10 md:py-40"><div className="flex flex-col justify-between"><div><p className="text-xs uppercase text-primary">Saturnina Cosmetics</p><h2 className="mt-8 text-6xl md:text-8xl">Ritual,<br/><em>todos os dias.</em></h2></div><p className="mt-12 max-w-sm leading-7 text-muted-foreground">Fórmulas e texturas pensadas para prolongar a experiência Saturnina para além do salão.</p><Link to="/cosmeticos" className="mt-8 inline-flex items-center gap-2 text-sm uppercase">Descobrir cosméticos <ArrowUpRight size={15}/></Link></div><img src={productsImage} loading="lazy" width={1200} height={1504} alt="Linha de cosméticos Saturnina" className="aspect-[4/5] w-full object-cover image-veil"/></section><Footer /></main>;
 }

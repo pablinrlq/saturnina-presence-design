@@ -10,33 +10,200 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AgendamentoRouteImport } from './routes/agendamento'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as CosmeticosRouteImport } from './routes/cosmeticos'
+import { Route as EditorialRouteImport } from './routes/editorial'
+import { Route as ExperienciaRouteImport } from './routes/experiencia'
+import { Route as ProfissionaisRouteImport } from './routes/profissionais'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SaturnClubRouteImport } from './routes/saturn-club'
+import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgendamentoRoute = AgendamentoRouteImport.update({
+  id: '/agendamento',
+  path: '/agendamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CosmeticosRoute = CosmeticosRouteImport.update({
+  id: '/cosmeticos',
+  path: '/cosmeticos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EditorialRoute = EditorialRouteImport.update({
+  id: '/editorial',
+  path: '/editorial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciaRoute = ExperienciaRouteImport.update({
+  id: '/experiencia',
+  path: '/experiencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfissionaisRoute = ProfissionaisRouteImport.update({
+  id: '/profissionais',
+  path: '/profissionais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SaturnClubRoute = SaturnClubRouteImport.update({
+  id: '/saturn-club',
+  path: '/saturn-club',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agendamento': typeof AgendamentoRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/cosmeticos': typeof CosmeticosRoute
+  '/editorial': typeof EditorialRoute
+  '/experiencia': typeof ExperienciaRoute
+  '/profissionais': typeof ProfissionaisRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/saturn-club': typeof SaturnClubRoute
+  '/servicos': typeof ServicosRoute
+  '/sobre': typeof SobreRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agendamento': typeof AgendamentoRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/cosmeticos': typeof CosmeticosRoute
+  '/editorial': typeof EditorialRoute
+  '/experiencia': typeof ExperienciaRoute
+  '/profissionais': typeof ProfissionaisRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/saturn-club': typeof SaturnClubRoute
+  '/servicos': typeof ServicosRoute
+  '/sobre': typeof SobreRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/agendamento': typeof AgendamentoRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/cosmeticos': typeof CosmeticosRoute
+  '/editorial': typeof EditorialRoute
+  '/experiencia': typeof ExperienciaRoute
+  '/profissionais': typeof ProfissionaisRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/saturn-club': typeof SaturnClubRoute
+  '/servicos': typeof ServicosRoute
+  '/sobre': typeof SobreRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agendamento'
+    | '/auth'
+    | '/contato'
+    | '/cosmeticos'
+    | '/editorial'
+    | '/experiencia'
+    | '/profissionais'
+    | '/reset-password'
+    | '/saturn-club'
+    | '/servicos'
+    | '/sobre'
+    | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agendamento'
+    | '/auth'
+    | '/contato'
+    | '/cosmeticos'
+    | '/editorial'
+    | '/experiencia'
+    | '/profissionais'
+    | '/reset-password'
+    | '/saturn-club'
+    | '/servicos'
+    | '/sobre'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/agendamento'
+    | '/auth'
+    | '/contato'
+    | '/cosmeticos'
+    | '/editorial'
+    | '/experiencia'
+    | '/profissionais'
+    | '/reset-password'
+    | '/saturn-club'
+    | '/servicos'
+    | '/sobre'
+    | '/_authenticated/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AgendamentoRoute: typeof AgendamentoRoute
+  AuthRoute: typeof AuthRoute
+  ContatoRoute: typeof ContatoRoute
+  CosmeticosRoute: typeof CosmeticosRoute
+  EditorialRoute: typeof EditorialRoute
+  ExperienciaRoute: typeof ExperienciaRoute
+  ProfissionaisRoute: typeof ProfissionaisRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SaturnClubRoute: typeof SaturnClubRoute
+  ServicosRoute: typeof ServicosRoute
+  SobreRoute: typeof SobreRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +215,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agendamento': {
+      id: '/agendamento'
+      path: '/agendamento'
+      fullPath: '/agendamento'
+      preLoaderRoute: typeof AgendamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cosmeticos': {
+      id: '/cosmeticos'
+      path: '/cosmeticos'
+      fullPath: '/cosmeticos'
+      preLoaderRoute: typeof CosmeticosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/editorial': {
+      id: '/editorial'
+      path: '/editorial'
+      fullPath: '/editorial'
+      preLoaderRoute: typeof EditorialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiencia': {
+      id: '/experiencia'
+      path: '/experiencia'
+      fullPath: '/experiencia'
+      preLoaderRoute: typeof ExperienciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profissionais': {
+      id: '/profissionais'
+      path: '/profissionais'
+      fullPath: '/profissionais'
+      preLoaderRoute: typeof ProfissionaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saturn-club': {
+      id: '/saturn-club'
+      path: '/saturn-club'
+      fullPath: '/saturn-club'
+      preLoaderRoute: typeof SaturnClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AgendamentoRoute: AgendamentoRoute,
+  AuthRoute: AuthRoute,
+  ContatoRoute: ContatoRoute,
+  CosmeticosRoute: CosmeticosRoute,
+  EditorialRoute: EditorialRoute,
+  ExperienciaRoute: ExperienciaRoute,
+  ProfissionaisRoute: ProfissionaisRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SaturnClubRoute: SaturnClubRoute,
+  ServicosRoute: ServicosRoute,
+  SobreRoute: SobreRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
