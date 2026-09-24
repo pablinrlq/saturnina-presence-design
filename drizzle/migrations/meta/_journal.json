@@ -15,6 +15,13 @@
       "when": 1790189976279,
       "tag": "0001_tighten_role_function_access",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790271653996,
+      "tag": "0002_clients_and_availability",
+      "breakpoints": true
     }
   ]
 }
