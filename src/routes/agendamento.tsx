@@ -5,9 +5,162 @@ import { Button } from "@/components/ui/button";
 import { PublicHeader } from "@/components/saturnina/public-header";
 import { SaturnMark } from "@/components/saturnina/brand";
 
-export const Route = createFileRoute("/agendamento")({ head:()=>({meta:[{title:"Agendamento — Saturnina"},{name:"description",content:"Reserve sua experiência Saturnina."},{property:"og:title",content:"Agendamento — Saturnina"},{property:"og:description",content:"Escolha sua experiência, profissional, data e horário."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: Booking });
+export const Route = createFileRoute("/agendamento")({
+  head: () => ({
+    meta: [
+      { title: "Agendamento — Saturnina" },
+      { name: "description", content: "Reserve sua experiência Saturnina." },
+      { property: "og:title", content: "Agendamento — Saturnina" },
+      {
+        property: "og:description",
+        content: "Escolha sua experiência, profissional, data e horário.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Booking,
+});
 const steps = ["Experiência", "Profissional", "Data", "Horário", "Seus dados", "Confirmação"];
-const choices = [["Corte & forma", "Tratamento ritual", "Coloração autoral", "Finalização"], ["Fernanda", "Camila", "Marina"], ["24 SET", "25 SET", "26 SET", "27 SET"], ["09:00", "11:30", "14:00", "16:30"]];
-function Booking() { const [step,setStep]=useState(0); const [selected,setSelected]=useState<string[]>([]); const pick=(value:string)=>setSelected((all)=>{const next=[...all];next[step]=value;return next}); const canNext=step>=4||Boolean(selected[step]); const currentChoices=choices[step] ?? []; return <main className="min-h-screen bg-brand-cream"><div className="relative h-24"><PublicHeader /></div><div className="mx-auto max-w-6xl px-5 pb-20 pt-10 md:px-10"><div className="flex items-center justify-between"><p className="text-xs uppercase text-primary">Reservar experiência</p><p className="text-xs">PASSO 0{step+1} / 06</p></div><div className="mt-5 h-px bg-border"><div className="h-px bg-primary transition-all" style={{width:`${((step+1)/6)*100}%`}} /></div>
-  {step<5 ? <section className="grid min-h-[60vh] content-center py-16 md:grid-cols-[1fr_1.4fr] md:gap-20"><div><p className="mb-6 text-xs uppercase text-muted-foreground">Passo 0{step+1}</p><h1 className="text-6xl leading-none md:text-8xl">{step===0?"Escolha sua experiência":step===1?"Com quem você deseja estar?":step===2?"Escolha a data":step===3?"Escolha o horário":"Seus dados"}</h1></div><div className="mt-14 md:mt-0">{step<4 ? <div className="border-t border-foreground">{currentChoices.map((item)=><button key={item} onClick={()=>pick(item)} className={`flex w-full items-center justify-between border-b border-foreground/20 px-2 py-6 text-left text-lg transition-colors ${selected[step]===item?"bg-primary text-primary-foreground":"hover:bg-primary/5"}`}><span>{item}</span>{selected[step]===item&&<Check size={18}/>}</button>)}</div>:<div className="space-y-8"><label className="block text-xs uppercase">Nome completo<input aria-label="Nome completo" className="mt-2 w-full border-b bg-transparent py-3 text-base outline-none"/></label><label className="block text-xs uppercase">E-mail<input type="email" aria-label="E-mail" className="mt-2 w-full border-b bg-transparent py-3 text-base outline-none"/></label><label className="block text-xs uppercase">WhatsApp<input aria-label="WhatsApp" className="mt-2 w-full border-b bg-transparent py-3 text-base outline-none"/></label></div>}</div></section>:<section className="flex min-h-[62vh] flex-col items-center justify-center text-center"><SaturnMark className="text-primary"/><p className="mt-8 text-xs uppercase text-primary">Confirmação</p><h1 className="mt-5 max-w-3xl text-6xl md:text-8xl">Sua experiência Saturnina está reservada.</h1><div className="mt-10 grid gap-6 text-left text-sm md:grid-cols-4"><span><b className="block text-xs uppercase text-muted-foreground">Experiência</b>{selected[0]}</span><span><b className="block text-xs uppercase text-muted-foreground">Profissional</b>{selected[1]}</span><span><b className="block text-xs uppercase text-muted-foreground">Data</b>{selected[2]}</span><span><b className="block text-xs uppercase text-muted-foreground">Horário</b>{selected[3]}</span></div><Button variant="editorial" className="mt-12"><CalendarPlus/> Adicionar ao calendário</Button></section>}
-  <div className="flex items-center justify-between border-t pt-6">{step>0?<Button variant="ghost" onClick={()=>setStep(step-1)}><ArrowLeft/> Voltar</Button>:<Link to="/" className="text-sm">Cancelar</Link>}{step<5&&<Button variant="editorial" disabled={!canNext} onClick={()=>setStep(step+1)}>{step===4?"Confirmar experiência":"Continuar"}<ArrowRight/></Button>}</div></div></main> }
+const choices = [
+  ["Corte & forma", "Tratamento ritual", "Coloração autoral", "Finalização"],
+  ["Fernanda", "Camila", "Marina"],
+  ["24 SET", "25 SET", "26 SET", "27 SET"],
+  ["09:00", "11:30", "14:00", "16:30"],
+];
+function Booking() {
+  const [step, setStep] = useState(0);
+  const [selected, setSelected] = useState<string[]>([]);
+  const pick = (value: string) =>
+    setSelected((all) => {
+      const next = [...all];
+      next[step] = value;
+      return next;
+    });
+  const canNext = step >= 4 || Boolean(selected[step]);
+  const currentChoices = choices[step] ?? [];
+  return (
+    <main className="min-h-screen bg-brand-cream">
+      <div className="relative h-24">
+        <PublicHeader />
+      </div>
+      <div className="mx-auto max-w-6xl px-5 pb-20 pt-10 md:px-10">
+        <div className="flex items-center justify-between">
+          <p className="text-xs uppercase text-primary">Reservar experiência</p>
+          <p className="text-xs">PASSO 0{step + 1} / 06</p>
+        </div>
+        <div className="mt-5 h-px bg-border">
+          <div
+            className="h-px bg-primary transition-all"
+            style={{ width: `${((step + 1) / 6) * 100}%` }}
+          />
+        </div>
+        {step < 5 ? (
+          <section className="grid min-h-[60vh] content-center py-16 md:grid-cols-[1fr_1.4fr] md:gap-20">
+            <div>
+              <p className="mb-6 text-xs uppercase text-muted-foreground">Passo 0{step + 1}</p>
+              <h1 className="text-6xl leading-none md:text-8xl">
+                {step === 0
+                  ? "Escolha sua experiência"
+                  : step === 1
+                    ? "Com quem você deseja estar?"
+                    : step === 2
+                      ? "Escolha a data"
+                      : step === 3
+                        ? "Escolha o horário"
+                        : "Seus dados"}
+              </h1>
+            </div>
+            <div className="mt-14 md:mt-0">
+              {step < 4 ? (
+                <div className="border-t border-foreground">
+                  {currentChoices.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => pick(item)}
+                      className={`flex w-full items-center justify-between border-b border-foreground/20 px-2 py-6 text-left text-lg transition-colors ${selected[step] === item ? "bg-primary text-primary-foreground" : "hover:bg-primary/5"}`}
+                    >
+                      <span>{item}</span>
+                      {selected[step] === item && <Check size={18} />}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-8">
+                  <label className="block text-xs uppercase">
+                    Nome completo
+                    <input
+                      aria-label="Nome completo"
+                      className="mt-2 w-full border-b bg-transparent py-3 text-base outline-none"
+                    />
+                  </label>
+                  <label className="block text-xs uppercase">
+                    E-mail
+                    <input
+                      type="email"
+                      aria-label="E-mail"
+                      className="mt-2 w-full border-b bg-transparent py-3 text-base outline-none"
+                    />
+                  </label>
+                  <label className="block text-xs uppercase">
+                    WhatsApp
+                    <input
+                      aria-label="WhatsApp"
+                      className="mt-2 w-full border-b bg-transparent py-3 text-base outline-none"
+                    />
+                  </label>
+                </div>
+              )}
+            </div>
+          </section>
+        ) : (
+          <section className="flex min-h-[62vh] flex-col items-center justify-center text-center">
+            <SaturnMark className="text-primary" />
+            <p className="mt-8 text-xs uppercase text-primary">Confirmação</p>
+            <h1 className="mt-5 max-w-3xl text-6xl md:text-8xl">
+              Sua experiência Saturnina está reservada.
+            </h1>
+            <div className="mt-10 grid gap-6 text-left text-sm md:grid-cols-4">
+              <span>
+                <b className="block text-xs uppercase text-muted-foreground">Experiência</b>
+                {selected[0]}
+              </span>
+              <span>
+                <b className="block text-xs uppercase text-muted-foreground">Profissional</b>
+                {selected[1]}
+              </span>
+              <span>
+                <b className="block text-xs uppercase text-muted-foreground">Data</b>
+                {selected[2]}
+              </span>
+              <span>
+                <b className="block text-xs uppercase text-muted-foreground">Horário</b>
+                {selected[3]}
+              </span>
+            </div>
+            <Button variant="editorial" className="mt-12">
+              <CalendarPlus /> Adicionar ao calendário
+            </Button>
+          </section>
+        )}
+        <div className="flex items-center justify-between border-t pt-6">
+          {step > 0 ? (
+            <Button variant="ghost" onClick={() => setStep(step - 1)}>
+              <ArrowLeft /> Voltar
+            </Button>
+          ) : (
+            <Link to="/" className="text-sm">
+              Cancelar
+            </Link>
+          )}
+          {step < 5 && (
+            <Button variant="editorial" disabled={!canNext} onClick={() => setStep(step + 1)}>
+              {step === 4 ? "Confirmar experiência" : "Continuar"}
+              <ArrowRight />
+            </Button>
+          )}
+        </div>
+      </div>
+    </main>
+  );
+}

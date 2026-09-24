@@ -1,2 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router"; import { ContentPage } from "@/components/saturnina/content-pages";
-export const Route = createFileRoute("/editorial")({ head:()=>({meta:[{title:"Editorial — Saturnina"},{name:"description",content:"O universo visual e sensorial Saturnina."},{property:"og:title",content:"Editorial — Saturnina"},{property:"og:description",content:"Uma beleza que permanece."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=> <ContentPage page="editorial"/> });
+import { createFileRoute } from "@tanstack/react-router";
+import { ContentPage } from "@/components/saturnina/content-pages";
+export const Route = createFileRoute("/editorial")({
+  head: () => ({
+    meta: [
+      { title: "Editorial — Saturnina" },
+      { name: "description", content: "O universo visual e sensorial Saturnina." },
+      { property: "og:title", content: "Editorial — Saturnina" },
+      { property: "og:description", content: "Uma beleza que permanece." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => <ContentPage page="editorial" />,
+});

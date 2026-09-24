@@ -1,2 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router"; import { ContentPage } from "@/components/saturnina/content-pages";
-export const Route = createFileRoute("/servicos")({ head:()=>({meta:[{title:"Serviços — Saturnina"},{name:"description",content:"Experiências de cabelo, tratamento, cor e finalização."},{property:"og:title",content:"Serviços — Saturnina"},{property:"og:description",content:"Beleza com intenção."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=> <ContentPage page="servicos"/> });
+import { createFileRoute } from "@tanstack/react-router";
+import { ContentPage } from "@/components/saturnina/content-pages";
+export const Route = createFileRoute("/servicos")({
+  head: () => ({
+    meta: [
+      { title: "Serviços — Saturnina" },
+      { name: "description", content: "Experiências de cabelo, tratamento, cor e finalização." },
+      { property: "og:title", content: "Serviços — Saturnina" },
+      { property: "og:description", content: "Beleza com intenção." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => <ContentPage page="servicos" />,
+});

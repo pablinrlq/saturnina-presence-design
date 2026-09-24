@@ -1,2 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router"; import { ContentPage } from "@/components/saturnina/content-pages";
-export const Route = createFileRoute("/contato")({ head:()=>({meta:[{title:"Contato — Saturnina"},{name:"description",content:"Entre em contato com a Saturnina."},{property:"og:title",content:"Contato — Saturnina"},{property:"og:description",content:"Seu encontro começa aqui."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=> <ContentPage page="contato"/> });
+import { createFileRoute } from "@tanstack/react-router";
+import { ContentPage } from "@/components/saturnina/content-pages";
+export const Route = createFileRoute("/contato")({
+  head: () => ({
+    meta: [
+      { title: "Contato — Saturnina" },
+      { name: "description", content: "Entre em contato com a Saturnina." },
+      { property: "og:title", content: "Contato — Saturnina" },
+      { property: "og:description", content: "Seu encontro começa aqui." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => <ContentPage page="contato" />,
+});

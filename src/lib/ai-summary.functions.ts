@@ -14,33 +14,44 @@ const Summary = z.object({
 
 export const summarizeSituation = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: unknown) => Input.parse(d))
+  .validator((d: unknown) => Input.parse(d))
   .handler(async ({ data, context }) => {
-    const { data: isAdmin } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" });
+    const { data: isAdmin } = await context.supabase.rpc("has_role", {
+      _user_id: context.userId,
+      _role: "admin",
+    });
     if (!isAdmin) throw new Error("Acesso restrito à administração.");
-    const key = process.env["LOVABLE_API_KEY"];
+    const key = process.env["OPENAI_API_KEY"];
     if (!key) throw new Error("Serviço de IA não configurado.");
 
-    const lovable = createOpenAI({
-      baseURL: "https://ai.gateway.lovable.dev/v1",
+    const openai = createOpenAI({
       apiKey: key,
-      headers: { "Lovable-API-Key": key, "X-Lovable-AIG-SDK": "vercel-ai-sdk" },
     });
     try {
       const result = streamText({
-        model: lovable.responses("openai/gpt-6-astra"),
+        model: openai.responses(process.env["OPENAI_MODEL"] ?? "gpt-4.1-mini"),
         output: Output.object({ schema: Summary }),
         system:
           "Você é assistente de atendimento da Saturnina, marca premium de beleza feminina. Responda em português do Brasil, com tom acolhedor, elegante e objetivo. Resuma a situação em até 3 frases, defina a prioridade, liste de 3 a 5 próximos passos práticos e curtos para a equipe, e sugira uma mensagem breve para enviar à cliente (WhatsApp). Não invente preços, políticas ou dados não informados.",
         prompt: data.situation,
-        providerOptions: { openai: { forceReasoning: true, reasoningEffort: "low", reasoningSummary: "auto", store: false, include: ["reasoning.encrypted_content"] } },
+        providerOptions: {
+          openai: {
+            forceReasoning: true,
+            reasoningEffort: "low",
+            reasoningSummary: "auto",
+            store: false,
+            include: ["reasoning.encrypted_content"],
+          },
+        },
       });
       const out = await result.output;
       return { ...out, proximos_passos: out.proximos_passos.slice(0, 6) };
     } catch (e) {
       const msg = e instanceof Error ? e.message : "";
-      if (msg.includes("402")) throw new Error("Créditos de IA esgotados. Adicione créditos ao workspace.");
-      if (msg.includes("429")) throw new Error("Muitas solicitações. Aguarde um instante e tente novamente.");
+      if (msg.includes("402"))
+        throw new Error("Créditos de IA esgotados. Adicione créditos ao workspace.");
+      if (msg.includes("429"))
+        throw new Error("Muitas solicitações. Aguarde um instante e tente novamente.");
       console.error(e);
       throw new Error("Não foi possível gerar o resumo agora.");
     }

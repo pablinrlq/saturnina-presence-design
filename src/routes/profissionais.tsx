@@ -1,2 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router"; import { ContentPage } from "@/components/saturnina/content-pages";
-export const Route = createFileRoute("/profissionais")({ head:()=>({meta:[{title:"Profissionais — Saturnina"},{name:"description",content:"Conheça os olhares autorais da Saturnina."},{property:"og:title",content:"Profissionais — Saturnina"},{property:"og:description",content:"Mãos que sabem revelar."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component:()=> <ContentPage page="profissionais"/> });
+import { createFileRoute } from "@tanstack/react-router";
+import { ContentPage } from "@/components/saturnina/content-pages";
+export const Route = createFileRoute("/profissionais")({
+  head: () => ({
+    meta: [
+      { title: "Profissionais — Saturnina" },
+      { name: "description", content: "Conheça os olhares autorais da Saturnina." },
+      { property: "og:title", content: "Profissionais — Saturnina" },
+      { property: "og:description", content: "Mãos que sabem revelar." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => <ContentPage page="profissionais" />,
+});
