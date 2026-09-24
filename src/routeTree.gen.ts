@@ -22,6 +22,8 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SaturnClubRouteImport } from './routes/saturn-club'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
+import { Route as AuthenticatedAssistenteRouteImport } from './routes/_authenticated/assistente'
 import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 
@@ -89,6 +91,16 @@ const SobreRoute = SobreRouteImport.update({
   path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAgendaRoute = AuthenticatedAgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAssistenteRoute = AuthenticatedAssistenteRouteImport.update({
+  id: '/assistente',
+  path: '/assistente',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedClientesRoute = AuthenticatedClientesRouteImport.update({
   id: '/clientes',
   path: '/clientes',
@@ -113,6 +125,8 @@ export interface FileRoutesByFullPath {
   '/saturn-club': typeof SaturnClubRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
+  '/assistente': typeof AuthenticatedAssistenteRoute
   '/clientes': typeof AuthenticatedClientesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
 }
@@ -129,6 +143,8 @@ export interface FileRoutesByTo {
   '/saturn-club': typeof SaturnClubRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
+  '/assistente': typeof AuthenticatedAssistenteRoute
   '/clientes': typeof AuthenticatedClientesRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
 }
@@ -147,6 +163,8 @@ export interface FileRoutesById {
   '/saturn-club': typeof SaturnClubRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
+  '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
+  '/_authenticated/assistente': typeof AuthenticatedAssistenteRoute
   '/_authenticated/clientes': typeof AuthenticatedClientesRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
 }
@@ -165,6 +183,8 @@ export interface FileRouteTypes {
     | '/saturn-club'
     | '/servicos'
     | '/sobre'
+    | '/agenda'
+    | '/assistente'
     | '/clientes'
     | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
@@ -181,6 +201,8 @@ export interface FileRouteTypes {
     | '/saturn-club'
     | '/servicos'
     | '/sobre'
+    | '/agenda'
+    | '/assistente'
     | '/clientes'
     | '/dashboard'
   id:
@@ -198,6 +220,8 @@ export interface FileRouteTypes {
     | '/saturn-club'
     | '/servicos'
     | '/sobre'
+    | '/_authenticated/agenda'
+    | '/_authenticated/assistente'
     | '/_authenticated/clientes'
     | '/_authenticated/dashboard'
   fileRoutesById: FileRoutesById
@@ -311,6 +335,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/agenda': {
+      id: '/_authenticated/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AuthenticatedAgendaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assistente': {
+      id: '/_authenticated/assistente'
+      path: '/assistente'
+      fullPath: '/assistente'
+      preLoaderRoute: typeof AuthenticatedAssistenteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/clientes': {
       id: '/_authenticated/clientes'
       path: '/clientes'
@@ -329,11 +367,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
+  AuthenticatedAssistenteRoute: typeof AuthenticatedAssistenteRoute
   AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
+  AuthenticatedAssistenteRoute: AuthenticatedAssistenteRoute,
   AuthenticatedClientesRoute: AuthenticatedClientesRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
 }
