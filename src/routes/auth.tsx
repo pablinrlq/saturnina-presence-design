@@ -5,6 +5,7 @@ import loginImage from "@/assets/saturnina-login.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { SaturnMark } from "@/components/saturnina/brand";
+import { loginWithEnvAdmin } from "@/lib/admin-auth.functions";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -31,9 +32,15 @@ function Auth() {
     const form = new FormData(e.currentTarget);
     const email = String(form.get("email") ?? "").trim();
     const password = String(form.get("password") ?? "");
+    const remember = form.get("remember") === "on";
     if (!email || password.length < 6) {
       setMessage("Revise seu e-mail e sua senha.");
       setLoading(false);
+      return;
+    }
+    const envLogin = await loginWithEnvAdmin({ data: { email, password, remember } });
+    if (envLogin.ok) {
+      await nav({ to: "/dashboard" });
       return;
     }
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -98,7 +105,7 @@ function Auth() {
           </label>
           <div className="my-7 flex items-center justify-between text-xs">
             <label className="flex min-h-11 items-center gap-2">
-              <input type="checkbox" className="accent-brand-pink" />
+              <input name="remember" type="checkbox" className="accent-brand-pink" />
               Lembrar de mim
             </label>
             <button

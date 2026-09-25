@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { SaturnMark } from "@/components/saturnina/brand";
 import { supabase } from "@/integrations/supabase/client";
+import { getEnvAdminSession } from "@/lib/admin-auth.functions";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -21,6 +22,11 @@ function AdminEntry() {
     let active = true;
 
     async function resolveDestination() {
+      const envSession = await getEnvAdminSession();
+      if (envSession.authenticated) {
+        await navigate({ to: "/dashboard", replace: true });
+        return;
+      }
       const { data } = await supabase.auth.getUser();
       if (!active) return;
 
