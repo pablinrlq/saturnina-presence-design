@@ -48,7 +48,7 @@ export function PublicHeader({ overlay = false }: { overlay?: boolean }) {
             size="icon"
             aria-label="Abrir menu"
             onClick={() => setOpen(true)}
-            className="public-menu-button"
+            className="public-menu-button size-11"
           >
             <Menu />
           </Button>
@@ -65,6 +65,7 @@ export function PublicHeader({ overlay = false }: { overlay?: boolean }) {
             size="icon"
             aria-label="Fechar menu"
             onClick={() => setOpen(false)}
+            className="size-11"
           >
             <X />
           </Button>
