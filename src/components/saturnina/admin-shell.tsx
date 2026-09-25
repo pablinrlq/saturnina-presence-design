@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { logoutEnvAdmin } from "@/lib/admin-auth.functions";
 
 const links = [
   { to: "/dashboard", label: "Visão geral", Icon: LayoutDashboard },
@@ -48,6 +49,7 @@ export function AdminShell({
   async function signOut() {
     await qc.cancelQueries();
     qc.clear();
+    await logoutEnvAdmin();
     await supabase.auth.signOut();
     await navigate({ to: "/auth", replace: true });
   }
