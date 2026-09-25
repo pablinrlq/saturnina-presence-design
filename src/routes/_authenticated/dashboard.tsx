@@ -28,6 +28,7 @@ const formatTime = (value: string) =>
   new Date(value).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 
 function Dashboard() {
+  const { authMode } = Route.useRouteContext();
   const today = new Date();
   const start = new Date(today);
   start.setHours(0, 0, 0, 0);
@@ -37,6 +38,9 @@ function Dashboard() {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["dashboard-overview", start.toISOString()],
     queryFn: async () => {
+      if (authMode === "env") {
+        return { appointments: [] as Appointment[], clientsCount: 0, displayName: "Saturnina" };
+      }
       const [appointmentsResult, clientsResult, profileResult] = await Promise.all([
         supabase
           .from("appointments")
