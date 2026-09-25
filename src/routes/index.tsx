@@ -1,17 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
 import heroImage from "@/assets/saturnina-hero.jpg";
 import hairImage from "@/assets/saturnina-hair.jpg";
+import loginImage from "@/assets/saturnina-login.jpg";
 import productsImage from "@/assets/saturnina-products.jpg";
-import { Button } from "@/components/ui/button";
 import { PublicHeader } from "@/components/saturnina/public-header";
 import { Footer } from "@/components/saturnina/page-shell";
+import { SaturnMark } from "@/components/saturnina/brand";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Saturnina — Beleza que revela presença" },
-      { name: "description", content: "Uma experiência de beleza autoral, editorial e sensorial." },
+      {
+        name: "description",
+        content:
+          "Uma experiência de beleza autoral, editorial e sensorial. Cabelo, cuidado e presença em um encontro singular.",
+      },
       { property: "og:title", content: "Saturnina — Beleza que revela presença" },
       {
         property: "og:description",
@@ -24,101 +29,329 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const services = [
+  {
+    number: "01",
+    symbol: "S",
+    title: "Corte & forma",
+    copy: "Um desenho autoral que respeita textura, movimento e a identidade que você deseja revelar.",
+  },
+  {
+    number: "02",
+    symbol: "C",
+    title: "Coloração autoral",
+    copy: "Cor construída com intenção, leitura de imagem e cuidado para um resultado sofisticado.",
+  },
+  {
+    number: "03",
+    symbol: "R",
+    title: "Rituais de tratamento",
+    copy: "Protocolos sensoriais que recuperam matéria, brilho e vitalidade sem apagar a sua essência.",
+  },
+];
+
+const editorial = [
+  { image: loginImage, label: "Presença", className: "editorial-tall" },
+  { image: hairImage, label: "Movimento", className: "editorial-wide" },
+  { image: productsImage, label: "Ritual", className: "" },
+  { image: heroImage, label: "Identidade", className: "" },
+];
+
+const faqs = [
+  [
+    "Como começa uma experiência Saturnina?",
+    "Tudo começa com escuta. Conversamos sobre seu momento, referências, rotina e desejos antes de definir qualquer caminho.",
+  ],
+  [
+    "Posso agendar uma avaliação antes do serviço?",
+    "Sim. A avaliação é indicada para mudanças de cor, correções e transformações que pedem diagnóstico técnico prévio.",
+  ],
+  [
+    "Como funciona a confirmação do agendamento?",
+    "Após escolher a experiência, profissional, data e horário, você envia seus dados e recebe a confirmação da equipe Saturnina.",
+  ],
+  [
+    "A Saturnina atende diferentes texturas de cabelo?",
+    "Sim. Nosso olhar parte da individualidade: textura, forma, história e rotina fazem parte da construção de cada resultado.",
+  ],
+];
+
 function Home() {
   return (
-    <main className="overflow-hidden bg-background">
-      <section className="relative min-h-[92vh] bg-brand-ink text-primary-foreground">
-        <PublicHeader overlay />
-        <img
-          src={heroImage}
-          width={1440}
-          height={1808}
-          alt="Retrato editorial Saturnina"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-90 image-veil"
-        />
-        <div className="relative z-10 flex min-h-[92vh] max-w-7xl flex-col justify-end px-5 pb-10 md:px-10 md:pb-14">
-          <h1 className="reveal max-w-4xl text-7xl leading-[.82] md:text-[8rem]">
-            Beleza que
-            <br />
-            <em>revela presença.</em>
-          </h1>
-          <div className="mt-10 flex items-end justify-between">
-            <Button asChild variant="soft" size="lg">
-              <Link to="/agendamento">Agendar experiência</Link>
-            </Button>
-            <span className="hidden items-center gap-3 text-[10px] uppercase md:flex">
-              Scroll to discover <ArrowDown size={14} />
-            </span>
+    <main className="home-page">
+      <section className="home-hero" id="inicio">
+        <PublicHeader />
+        <div className="home-hero-grid">
+          <div className="home-hero-copy reveal">
+            <p className="home-eyebrow">Saturnina Concept Hair</p>
+            <h1>
+              Beleza que
+              <br />
+              <em>revela presença.</em>
+            </h1>
+            <p className="home-lead">
+              Uma experiência autoral de beleza, criada para revelar identidade, força e
+              sofisticação de forma sensorial.
+            </p>
+            <div className="home-actions">
+              <Link to="/agendamento" className="home-primary-button">
+                Agendar experiência <ArrowRight size={16} />
+              </Link>
+              <a href="#manifesto" className="home-text-link">
+                Descobrir Saturnina <ArrowDownRight size={16} />
+              </a>
+            </div>
+            <div className="home-trust-row" aria-label="Essência Saturnina">
+              <span>Escuta</span>
+              <i />
+              <span>Intenção</span>
+              <i />
+              <span>Presença</span>
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="mx-auto max-w-7xl px-5 py-32 md:px-10 md:py-52">
-        <p className="mb-12 text-xs uppercase text-primary">Manifesto Saturnina</p>
-        <div className="grid gap-14 md:grid-cols-[1fr_2.5fr]">
-          <p className="text-sm leading-6 text-muted-foreground">
-            A estética como portal para revelar identidade, força e sofisticação de forma autêntica.
-          </p>
-          <h2 className="text-5xl leading-[1.02] md:text-8xl">
-            Não é sobre transformar você em outra pessoa.
-            <br />
-            <em className="text-primary">É sobre revelar aquilo que sempre esteve aí.</em>
-          </h2>
-        </div>
-      </section>
-      <section className="grid min-h-[80vh] md:grid-cols-2">
-        <img
-          src={hairImage}
-          loading="lazy"
-          width={1600}
-          height={1104}
-          alt="Cabelos em movimento"
-          className="h-full min-h-[55vh] w-full object-cover image-veil"
-        />
-        <div className="flex flex-col justify-between bg-primary p-8 text-primary-foreground md:p-16">
-          <p className="text-xs uppercase">A experiência</p>
-          <div>
-            <h2 className="text-6xl leading-none md:text-8xl">
-              Sua essência.
-              <br />
-              Sua força.
-              <br />
-              Sua presença.
-            </h2>
-            <Link
-              to="/experiencia"
-              className="mt-12 inline-flex items-center gap-2 border-b pb-2 text-sm uppercase"
-            >
-              Conhecer a experiência <ArrowUpRight size={15} />
+
+          <div className="home-hero-visual">
+            <div className="home-hero-orbit" aria-hidden="true" />
+            <div className="home-hero-arch">
+              <img src={heroImage} width={1440} height={1808} alt="Retrato editorial Saturnina" />
+            </div>
+            <span className="home-hero-letter" aria-hidden="true">
+              S
+            </span>
+            <Link to="/agendamento" className="home-booking-peek">
+              <SaturnMark />
+              <span>
+                <small>COMECE SUA EXPERIÊNCIA</small>
+                <strong>Escolha seu ritual de beleza</strong>
+              </span>
+              <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
       </section>
-      <section className="mx-auto grid max-w-7xl gap-14 px-5 py-28 md:grid-cols-2 md:px-10 md:py-40">
-        <div className="flex flex-col justify-between">
+
+      <div className="home-marquee" aria-hidden="true">
+        <span>BELEZA COM INTENÇÃO</span>
+        <i>✦</i>
+        <span>SUA ESSÊNCIA, SUA FORÇA</span>
+        <i>✦</i>
+        <span>BELEZA QUE REVELA PRESENÇA</span>
+      </div>
+
+      <section className="home-manifesto home-section" id="manifesto">
+        <div className="home-section-heading">
           <div>
-            <p className="text-xs uppercase text-primary">Saturnina Cosmetics</p>
-            <h2 className="mt-8 text-6xl md:text-8xl">
-              Ritual,
+            <p className="home-eyebrow">Manifesto Saturnina</p>
+            <h2>
+              Você não precisa
               <br />
-              <em>todos os dias.</em>
+              <em>se tornar outra.</em>
             </h2>
           </div>
-          <p className="mt-12 max-w-sm leading-7 text-muted-foreground">
-            Fórmulas e texturas pensadas para prolongar a experiência Saturnina para além do salão.
+          <p>
+            Acreditamos na estética como portal de reencontro. Técnica e sensibilidade se encontram
+            para revelar aquilo que sempre esteve aí — a sua presença.
           </p>
-          <Link to="/cosmeticos" className="mt-8 inline-flex items-center gap-2 text-sm uppercase">
-            Descobrir cosméticos <ArrowUpRight size={15} />
-          </Link>
         </div>
-        <img
-          src={productsImage}
-          loading="lazy"
-          width={1200}
-          height={1504}
-          alt="Linha de cosméticos Saturnina"
-          className="aspect-[4/5] w-full object-cover image-veil"
-        />
+        <div className="home-manifesto-statement">
+          <span className="home-statement-number">01</span>
+          <p>Não criamos personagens.</p>
+          <strong>Revelamos identidades.</strong>
+          <SaturnMark className="home-statement-mark" />
+        </div>
       </section>
+
+      <section className="home-services" id="servicos">
+        <div className="home-section home-services-inner">
+          <div className="home-section-heading home-heading-light">
+            <div>
+              <p className="home-eyebrow">Nossas experiências</p>
+              <h2>
+                Técnica, cuidado
+                <br />
+                <em>e intenção.</em>
+              </h2>
+            </div>
+            <p>
+              Cada serviço nasce de uma leitura singular e termina em um resultado que faz sentido
+              para você.
+            </p>
+          </div>
+          <div className="home-services-grid">
+            {services.map((service) => (
+              <article key={service.number}>
+                <span className="home-service-number">{service.number}</span>
+                <span className="home-service-symbol" aria-hidden="true">
+                  {service.symbol}
+                </span>
+                <h3>{service.title}</h3>
+                <p>{service.copy}</p>
+                <Link to="/agendamento">
+                  Reservar experiência <ArrowRight size={15} />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-editorial home-section" id="editorial">
+        <div className="home-section-heading">
+          <div>
+            <p className="home-eyebrow">Editorial</p>
+            <h2>
+              Gestos, texturas
+              <br />
+              <em>e histórias.</em>
+            </h2>
+          </div>
+          <p>
+            O universo Saturnina em imagens: uma beleza viva, contemporânea e profundamente pessoal.
+          </p>
+        </div>
+        <div className="home-editorial-grid">
+          {editorial.map((item) => (
+            <figure className={item.className} key={item.label}>
+              <img src={item.image} loading="lazy" alt={`Editorial Saturnina — ${item.label}`} />
+              <figcaption>
+                <span>{item.label}</span>
+                <small>Saturnina editorial</small>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <Link to="/editorial" className="home-underlined-link">
+          Conhecer o editorial <ArrowUpRight size={15} />
+        </Link>
+      </section>
+
+      <section className="home-experience home-section">
+        <div className="home-experience-photo">
+          <img src={hairImage} loading="lazy" alt="Cabelos em movimento" />
+          <span>
+            Um encontro
+            <br />
+            com a sua presença
+          </span>
+        </div>
+        <div className="home-experience-copy">
+          <p className="home-eyebrow">A experiência</p>
+          <h2>
+            Seu momento.
+            <br />
+            <em>No seu tempo.</em>
+          </h2>
+          <p>
+            Um atendimento atento, sensorial e sem fórmulas prontas. Da primeira conversa ao último
+            gesto, tudo é pensado para que você se reconheça no espelho.
+          </p>
+          <ol>
+            <li>
+              <span>01</span>
+              <div>
+                <strong>Escuta & intenção</strong>
+                <small>Entendemos seu momento, rotina e desejo.</small>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <strong>Leitura personalizada</strong>
+                <small>Forma, textura e identidade orientam cada escolha.</small>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <strong>Ritual & revelação</strong>
+                <small>Técnica e cuidado culminam em um resultado só seu.</small>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="home-about" id="sobre">
+        <div className="home-about-inner">
+          <div className="home-about-copy">
+            <p className="home-eyebrow">Sobre a marca</p>
+            <h2>
+              Saturnina é<br />
+              <em>presença.</em>
+            </h2>
+            <p>
+              Uma marca brasileira de beleza e experiência feminina que transforma o cuidado em um
+              portal de reencontro com a própria identidade.
+            </p>
+            <Link to="/sobre" className="home-text-link home-text-link-light">
+              Conhecer nossa essência <ArrowUpRight size={16} />
+            </Link>
+            <div className="home-about-values">
+              <div>
+                <strong>Autoral</strong>
+                <span>Nenhuma beleza é igual à outra.</span>
+              </div>
+              <div>
+                <strong>Sensorial</strong>
+                <span>O cuidado vive em cada detalhe.</span>
+              </div>
+            </div>
+          </div>
+          <div className="home-about-photo">
+            <img src={loginImage} loading="lazy" alt="Mulher no universo Saturnina" />
+            <span className="home-about-word" aria-hidden="true">
+              presença
+            </span>
+            <div className="home-about-seal">
+              <SaturnMark />
+              <span>
+                BELEZA
+                <br />
+                AUTORAL
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-faq home-section">
+        <div>
+          <p className="home-eyebrow">Antes do encontro</p>
+          <h2>
+            Dúvidas
+            <br />
+            <em>frequentes.</em>
+          </h2>
+        </div>
+        <div className="home-faq-list">
+          {faqs.map(([question, answer]) => (
+            <details key={question}>
+              <summary>
+                {question}
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-final-cta">
+        <SaturnMark className="home-final-mark" />
+        <p className="home-eyebrow">Seu próximo encontro com você</p>
+        <h2>
+          Pronta para revelar
+          <br />
+          <em>sua presença?</em>
+        </h2>
+        <Link to="/agendamento" className="home-primary-button home-primary-button-light">
+          Agendar experiência <ArrowRight size={16} />
+        </Link>
+        <span className="home-final-script" aria-hidden="true">
+          saturnina
+        </span>
+      </section>
+
       <Footer />
     </main>
   );
