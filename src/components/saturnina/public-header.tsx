@@ -15,14 +15,26 @@ const links = [
   ["Contato", "/contato"],
 ] as const;
 
+const featuredLinks = [
+  ["Experiência", "/experiencia"],
+  ["Serviços", "/servicos"],
+  ["Editorial", "/editorial"],
+  ["Sobre", "/sobre"],
+] as const;
+
 export function PublicHeader({ overlay = false }: { overlay?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <header
-        className={`absolute inset-x-0 top-0 z-40 flex items-center justify-between px-5 py-6 md:px-10 ${overlay ? "text-primary-foreground" : "text-foreground"}`}
-      >
+      <header className={`public-header ${overlay ? "public-header-overlay" : ""}`}>
         <Wordmark light={overlay} />
+        <nav className="public-desktop-nav" aria-label="Navegação principal">
+          {featuredLinks.map(([label, to]) => (
+            <Link key={to} to={to}>
+              {label}
+            </Link>
+          ))}
+        </nav>
         <div className="flex items-center gap-3">
           <Button
             asChild
@@ -36,13 +48,14 @@ export function PublicHeader({ overlay = false }: { overlay?: boolean }) {
             size="icon"
             aria-label="Abrir menu"
             onClick={() => setOpen(true)}
+            className="public-menu-button"
           >
             <Menu />
           </Button>
         </div>
       </header>
       <div
-        className={`fixed inset-0 z-50 bg-primary text-primary-foreground transition-transform duration-700 ${open ? "translate-y-0" : "-translate-y-full"}`}
+        className={`fixed inset-0 z-50 bg-primary text-primary-foreground transition-transform duration-700 ${open ? "translate-y-0" : "-translate-y-full pointer-events-none"}`}
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between px-5 py-6 md:px-10">
