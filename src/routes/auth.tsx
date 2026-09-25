@@ -91,17 +91,21 @@ function Auth() {
               type="button"
               onClick={() => setShow(!show)}
               aria-label="Exibir senha"
-              className="absolute bottom-3 right-1"
+              className="absolute -bottom-1 -right-2 flex size-11 items-center justify-center"
             >
               {show ? <EyeOff size={17} /> : <Eye size={17} />}
             </button>
           </label>
           <div className="my-7 flex items-center justify-between text-xs">
-            <label className="flex items-center gap-2">
+            <label className="flex min-h-11 items-center gap-2">
               <input type="checkbox" className="accent-brand-pink" />
               Lembrar de mim
             </label>
-            <button type="button" onClick={reset} className="border-b border-primary-foreground/40">
+            <button
+              type="button"
+              onClick={reset}
+              className="min-h-11 border-b border-primary-foreground/40"
+            >
               Esqueci minha senha
             </button>
           </div>
